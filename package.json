@@ -15,7 +15,7 @@
     "local": "ts-node-dev --respawn --transpileOnly src/index.ts",
     "dev": "docker-compose up",
     "stop": "docker-compose down",
-    "startLocalDb": "docker run --rm -h localhost --name pg-docker -v $(pwd)/scripts:/docker-entrypoint-initdb.d  -e POSTGRES_PASSWORD=pass -e POSTGRES_USER=ruser -e POSTGRES_MULTIPLE_DATABASES=recipe,testdb -d -p 5433:5432 postgres:11.5",
+    "startLocalDb": "docker run --rm -h localhost --name pg-docker -v $(pwd)/scripts:/docker-entrypoint-initdb.d  -e POSTGRES_PASSWORD=pass -e POSTGRES_USER=ruser -e POSTGRES_MULTIPLE_DATABASES=main,testdb -d -p 5433:5432 postgres:11.5",
     "stopLocalDb": "docker kill pg-docker",
     "fix": "run-s fix:*",
     "fix:prettier": "prettier \"src/**/*.ts\" --write",
