@@ -1,1 +1,1 @@
-# hackathon_starter
+starter repo
