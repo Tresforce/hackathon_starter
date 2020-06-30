@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
-import { logger } from '../../utils';
-import DetailedError from '../../utils/DetailedError';
+import { NOT_FOUND } from 'http-status-codes';
+import logger from '../../../utils/logger';
+import DetailedError from '../../../utils/DetailedError';
 
 const winston = logger(module);
 
@@ -17,12 +18,13 @@ export function notFoundError(
   res: Response,
   next: NextFunction
 ): void {
-  winston.warn(req);
   const error = new DetailedError({
     name: 'NotFoundError',
     message: 'Not Found',
-    statusCode: 404,
-    contextObject: {}
+    statusCode: NOT_FOUND,
+    contextObject: {
+      path: req.url
+    }
   });
   next(error);
 }
@@ -47,8 +49,9 @@ export function sendError(
   winston.error(err);
   res.status(err.status);
   return res.json({
-    errors: {
-      message: err.message
+    error: {
+      message: err.message,
+      object: err.contextObject
     }
   });
 }

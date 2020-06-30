@@ -1,6 +1,9 @@
 import { getRepository } from 'typeorm';
 import DetailedError from '../../../utils/DetailedError';
-import { Entities } from '../../../types/postgres';
+
+export async function find<T>(model: string, query: Partial<T>): Promise<T> {
+  return getRepository<T>(model).findOneOrFail({ where: query });
+}
 
 /**
  * Find all the documents for an entity
@@ -9,7 +12,7 @@ import { Entities } from '../../../types/postgres';
  * @param {Entities} model
  * @returns {Promise<any[]>}
  */
-export async function findAll<T>(model: Entities): Promise<T[]> {
+export async function findAll<T>(model: string): Promise<T[]> {
   return getRepository<T>(model).find({});
 }
 
@@ -21,7 +24,7 @@ export async function findAll<T>(model: Entities): Promise<T[]> {
  * @param {string} id Id of the Entity you are searching for
  * @returns {Promise<any>}
  */
-export async function findById<T>(model: Entities, id: string): Promise<T> {
+export async function findById<T>(model: string, id: string): Promise<T> {
   try {
     return getRepository<T>(model).findOneOrFail(id);
   } catch (error) {

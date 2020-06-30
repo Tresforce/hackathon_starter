@@ -4,7 +4,7 @@ import user from './routes/user';
 export default (): Router => {
   const app = Router();
 
-  // Register Routes
+  /* Register Routes */
   user(app);
 
   return app;

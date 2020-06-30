@@ -1,5 +1,4 @@
 import { EntityManager, UpdateResult } from 'typeorm';
-import { Entities } from '../../../types/postgres';
 import DbHelper from '../utils/helper';
 import { DatabaseModel } from '../../../types/databaseController';
 
@@ -13,11 +12,11 @@ import { DatabaseModel } from '../../../types/databaseController';
  */
 export async function updateById(
   transactionManager: EntityManager,
-  model: Entities,
-  entityUpdate: DatabaseModel
+  model: string,
+  entityUpdate: Partial<DatabaseModel>
 ): Promise<UpdateResult> {
   const { id } = entityUpdate;
-  await DbHelper.validateEntityExistsbyIds({ ids: [id], model });
+  await DbHelper.validateEntityExistsbyIds({ ids: [id!], model });
   return transactionManager.update<DatabaseModel>(model, id, entityUpdate);
 }
 

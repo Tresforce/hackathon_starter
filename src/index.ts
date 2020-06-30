@@ -3,17 +3,18 @@
 /* eslint-disable import/first */
 require('dotenv').config();
 
-// We need to load environment variables first
+/* We need to load environment variables first */
 import express from 'express';
 import config from './config';
-import { logger } from './utils';
+import logger from './utils/logger';
 
 const winston = logger(module);
-const { APP_PORT, API_VERSION } = config.application;
+
+const { APP_PORT, API_VERSION, NODE_ENV } = config;
 
 async function startServer(): Promise<void> {
   const app = express();
-  winston.info(`Node env is ${process.env.NODE_ENV}`);
+  winston.info(`Node env is ${NODE_ENV}`);
   try {
     await require('./loaders').default({ expressApp: app });
   } catch (error) {

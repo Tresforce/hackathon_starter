@@ -1,10 +1,11 @@
-import { logger } from '../utils';
+import logger from '../utils/logger';
 import application from './application';
 import database from './database';
+import { Config } from '../types/config';
 
 const winston = logger(module);
 
-const config = {
+const config: Config = {
   ...application,
   ...database
 };
@@ -22,4 +23,4 @@ Object.entries(config).forEach(environmentVariable => {
   }
 });
 
-export default { application, database };
+export default config;

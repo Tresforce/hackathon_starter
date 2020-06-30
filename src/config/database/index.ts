@@ -1,3 +1,5 @@
+import { DatabaseConfig } from '../../types/config';
+
 const {
   TYPEORM_HOST,
   TYPEORM_USERNAME,
@@ -6,12 +8,13 @@ const {
   TYPEORM_PORT
 } = process.env;
 
-const database = {
-  host: TYPEORM_HOST,
-  port: typeof TYPEORM_PORT !== 'undefined' ? parseInt(TYPEORM_PORT, 10) : 5433,
-  username: TYPEORM_USERNAME,
-  password: TYPEORM_PASSWORD,
-  database: TYPEORM_DATABASE
+const database: DatabaseConfig = {
+  TYPEORM_HOST: TYPEORM_HOST as string,
+  TYPEORM_PORT:
+    typeof TYPEORM_PORT !== 'undefined' ? parseInt(TYPEORM_PORT, 10) : 5433,
+  TYPEORM_USERNAME: TYPEORM_USERNAME as string,
+  TYPEORM_PASSWORD: TYPEORM_PASSWORD as string,
+  TYPEORM_DATABASE: TYPEORM_DATABASE as string
 };
 
 export default database;

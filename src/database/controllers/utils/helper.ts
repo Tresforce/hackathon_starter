@@ -1,7 +1,6 @@
 import { EntityManager, getRepository, getConnection } from 'typeorm';
 import { ColumnMetadata } from 'typeorm/metadata/ColumnMetadata';
 import { flatten } from 'lodash';
-import { Entities } from '../../../types/postgres';
 import { EntityObject } from '../../../types/databaseController';
 import { NON_UPDATABLE_FIELDS } from '../../../utils/constants/database';
 import DetailedError from '../../../utils/DetailedError';
@@ -35,7 +34,7 @@ export default class DbHelper {
     ids
   }: {
     transactionManager?: EntityManager;
-    model: Entities;
+    model: string;
     ids: string[];
   }): Promise<any> {
     if (typeof transactionManager !== 'undefined') {
@@ -70,6 +69,7 @@ export default class DbHelper {
     }
     return this.sanitize(input);
   }
+
   /**
    * Validates that the input has all of the required fields from the schema
    *
@@ -92,7 +92,7 @@ export default class DbHelper {
    * @param {EntityObject} input Object being inserted or created
    * @memberof DbHelper
    */
-  static isValidForInsertOrUpdate(model: Entities, input: EntityObject): void {
+  static isValidForUpdate(model: Entities, input: EntityObject): void {
     const updatableFields = this.getUpdatableFields(model);
     if (Object.keys(input).some(field => !updatableFields.includes(field))) {
       const invalidFields = { ...input };

@@ -1,4 +1,4 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, Index } from 'typeorm';
 import BaseEntity from '../BaseEntity';
 import Address from '../Address';
 
@@ -10,8 +10,12 @@ export default class User extends BaseEntity {
   @Column()
   public lastName!: string;
 
+  @Index('email-idx')
   @Column()
   public email!: string;
+
+  @Column()
+  public password!: string;
 
   @Column()
   public phoneNumber!: string;
