@@ -1,13 +1,13 @@
 {
-  "name": "recipes",
+  "name": "hackathon_starter",
   "version": "1.0.0",
-  "description": "28 day meal planner",
+  "description": "repo starter for hackathons or side projects",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
   "module": "build/module/index.js",
   "repository": "https://github.com/treforce/hackathon_starter",
   "license": "MIT",
-  "keywords": [],
+  "keywords": ["typescript", "starter", "node", "express", "postgres"],
   "scripts": {
     "describe": "npm-scripts-info",
     "build": "run-s clean && run-p build:*",
