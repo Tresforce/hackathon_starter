@@ -1,7 +1,7 @@
 import { EntityManager, getRepository, getConnection } from 'typeorm';
 import { ColumnMetadata } from 'typeorm/metadata/ColumnMetadata';
 import { flatten } from 'lodash';
-import { EntityObject } from '../../../types/databaseController';
+import { EntityObject } from '../../../typings/databaseController';
 import { NON_UPDATABLE_FIELDS } from '../../../utils/constants/database';
 import DetailedError from '../../../utils/DetailedError';
 
@@ -79,7 +79,7 @@ export default class DbHelper {
    * @returns {boolean}
    * @memberof DbHelper
    */
-  static isValidInputForInsert(model: Entities, input: EntityObject): boolean {
+  static isValidInputForInsert(model: string, input: EntityObject): boolean {
     const requiredFields = this.getRequiredFields(model);
     return requiredFields.every(field => typeof input[field] !== 'undefined');
   }
@@ -92,7 +92,7 @@ export default class DbHelper {
    * @param {EntityObject} input Object being inserted or created
    * @memberof DbHelper
    */
-  static isValidForUpdate(model: Entities, input: EntityObject): void {
+  static isValidForUpdate(model: string, input: EntityObject): void {
     const updatableFields = this.getUpdatableFields(model);
     if (Object.keys(input).some(field => !updatableFields.includes(field))) {
       const invalidFields = { ...input };
@@ -114,7 +114,7 @@ export default class DbHelper {
    * @returns {string[]} an array of fields that updatable
    * @memberof DbHelper
    */
-  static getUpdatableFields(model: Entities): string[] {
+  static getUpdatableFields(model: string): string[] {
     const schema = this.getSchema(model);
     return Object.keys(schema).filter(
       field => !NON_UPDATABLE_FIELDS.includes(field)

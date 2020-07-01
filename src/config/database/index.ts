@@ -1,4 +1,4 @@
-import { DatabaseConfig } from '../../types/config';
+import { DatabaseConfig } from '../../typings/config';
 
 const {
   TYPEORM_HOST,

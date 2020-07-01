@@ -101,6 +101,7 @@ const baseRules = {
   semi: 'off',
   quotes: 'off',
   indent: 'off',
+  'no-void': 'off',
   'import/extensions': 'off',
   'prettier/prettier': ['error', { singleQuote: true }],
   'brace-style': 'off',

@@ -1,6 +1,6 @@
 import { EntityManager, UpdateResult } from 'typeorm';
 import DbHelper from '../utils/helper';
-import { DatabaseModel } from '../../../types/databaseController';
+import { DatabaseModel } from '../../../typings/databaseController';
 
 /**
  * Updates entity by Id
@@ -31,7 +31,7 @@ export async function updateById(
  */
 export async function updateMany(
   transactionManager: EntityManager,
-  model: Entities,
+  model: string,
   entityUpdateArray: DatabaseModel[]
 ): Promise<UpdateResult[]> {
   const ids = entityUpdateArray.map(update => update.id);

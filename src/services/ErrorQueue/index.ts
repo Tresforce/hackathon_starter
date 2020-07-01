@@ -2,7 +2,7 @@ import { Queue, Worker } from 'bullmq';
 import IORedis from 'ioredis';
 import logger from '../../utils/logger';
 
-const connection = new IORedis({ host: 'redis', port: 6379 });
+const connection = new IORedis({ host: 'localhost', port: 6379 });
 const queueName = 'ErrorQue';
 const winston = logger(module);
 
@@ -29,3 +29,11 @@ worker.on('failed', (job, err) => {
 export default async function addJobs(): Promise<void> {
   await myQueue.add('myJobName', { foo: 'bar' });
 }
+
+void (async function main(): Promise<void> {
+  try {
+    await addJobs();
+  } catch {
+    winston.error('something bad has happened');
+  }
+})();

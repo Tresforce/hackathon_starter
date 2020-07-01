@@ -1,5 +1,5 @@
 import { EntityManager } from 'typeorm';
-import { DatabaseModel } from '../../../types/databaseController';
+import { DatabaseModel } from '../../../typings/databaseController';
 
 export async function insertOne(
   transactionManager: EntityManager,

@@ -1,7 +1,7 @@
 import logger from '../utils/logger';
 import application from './application';
 import database from './database';
-import { Config } from '../types/config';
+import { Config } from '../typings/config';
 
 const winston = logger(module);
 

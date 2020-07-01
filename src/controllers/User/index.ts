@@ -2,9 +2,9 @@ import { getManager } from 'typeorm';
 import User from '../../database/entities/User';
 import DbController from '../../database/controllers';
 import logger from '../../utils/logger';
-import { EntityObject } from '../../types/databaseController';
+import { EntityObject } from '../../typings/databaseController';
 import AuthService from '../../services/auth';
-import { AuthenticatedUser } from '../../types/auth';
+import { AuthenticatedUser } from '../../typings/auth';
 
 const winston = logger(module);
 

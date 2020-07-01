@@ -6,7 +6,7 @@ import User from '../../database/entities/User';
 import DbController from '../../database/controllers';
 import UserController from '../../controllers/User';
 import DetailedError from '../../utils/DetailedError';
-import { AuthenticatedUser } from '../../types/auth';
+import { AuthenticatedUser } from '../../typings/auth';
 import config from '../../config';
 
 const signature = config.SECRET;

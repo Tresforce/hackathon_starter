@@ -2,7 +2,7 @@ import {
   ExpressServerConfig,
   APIVersion,
   NodeEnvironment
-} from '../../types/config';
+} from '../../typings/config';
 
 const { PORT, API_VERSION } = process.env;
 let { NODE_ENV, SECRET } = process.env;

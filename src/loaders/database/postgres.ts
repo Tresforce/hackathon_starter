@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import { Connection, ConnectionOptions, createConnection } from 'typeorm';
 import config from '../../config';
 import User from '../../database/entities/User';
-import { PostgresConnectionOptions } from '../../types/postgres';
+import { PostgresConnectionOptions } from '../../typings/postgres';
 import logger from '../../utils/logger';
 
 const winston = logger(module);

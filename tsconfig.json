@@ -1,14 +1,8 @@
 {
   "compilerOptions": {
     "target": "es2017",
-    "lib": [
-      "es2017",
-      "esnext.asynciterable"
-    ],
-    "typeRoots": [
-      "./node_modules/@types",
-      "./src/types"
-    ],
+    "lib": ["es2017", "esnext.asynciterable"],
+    "typeRoots": ["./node_modules/@types", "src/typings"],
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -20,17 +14,11 @@
     "strictNullChecks": true,
     "sourceMap": true,
     "noImplicitAny": true,
-    "outDir": "./build",
+    // "outDir": "./build",
     "allowJs": true,
     "noEmit": false,
     "esModuleInterop": true
   },
-  "include": [
-    "src/**/*.ts",
-  ],
-  "exclude": [
-    "node_modules",
-    "coverage/*",
-    "build/*"
-  ]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "coverage", "build", "task"]
 }
