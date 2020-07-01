@@ -16,8 +16,8 @@ RUN npm run build:bundle
 ## Containerize Prod
 FROM node:12-alpine as app
 # Install dependencies
-COPY package.json .
+COPY --from=builder package.json .
 RUN npm install --production
-COPY --from=builder ./dist ./dist
+COPY --from=builder ./build/server ./dist
 EXPOSE 3005
 CMD ["npm", "start"]

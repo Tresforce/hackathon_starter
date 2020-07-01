@@ -10,7 +10,7 @@
   "keywords": [],
   "scripts": {
     "describe": "npm-scripts-info",
-    "build": "run-s clean && run-p build:*",
+    "build": "run-p build:*",
     "build:bundle": "webpack",
     "local": "ts-node-dev --respawn --transpileOnly src/index.ts",
     "dev": "docker-compose up",
@@ -24,9 +24,9 @@
     "test-ci": "run-p test:*",
     "test:build": "tsc --noEmit",
     "test:lint": "eslint \"**/*.{js,ts}\" && prettier \"src/**/*.ts\" --list-different",
-    "test:unit": "jest --group=unit --collectCoverage=true",
-    "test:integration": "jest --group=integration --collectCoverage=true",
-    "watch": "run-s clean build:main && run-p \"build:main -- -w\" \"test:unit -- --watch\"",
+    "test:unit": "jest --group=unit",
+    "test:integration": "jest --group=integration",
+    "watch": "run-p \"local\" \"test:unit -- --watch\"",
     "cov": "codecov",
     "task": "run-s task:*",
     "task:redis": "docker run --rm -h localhost --name redis-docker -d -p 6379:6379 redis",
@@ -40,8 +40,7 @@
     "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d build/docs",
     "version": "standard-version",
     "reset": "git clean -dfx && git reset --hard && npm i",
-    "clean": "trash build task",
-    "help": "trash --help",
+    "clean": "trash build",
     "prepare-release": "run-s test doc:html doc:publish"
   },
   "scripts-info": {

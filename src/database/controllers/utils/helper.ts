@@ -74,7 +74,7 @@ export default class DbHelper {
    * Validates that the input has all of the required fields from the schema
    *
    * @static
-   * @param {Entities} model The entity being created
+   * @param {string} model The entity being created
    * @param {EntityObject} input the object being inserted into the database
    * @returns {boolean}
    * @memberof DbHelper
@@ -88,7 +88,7 @@ export default class DbHelper {
    * Checks if there are extra fields that are not in schema
    *
    * @static
-   * @param {Entities} model Entity being created or updated
+   * @param {string} model Entity being created or updated
    * @param {EntityObject} input Object being inserted or created
    * @memberof DbHelper
    */
@@ -110,7 +110,7 @@ export default class DbHelper {
    * Gets the fields that are updatable for the Entity
    *
    * @static
-   * @param {Entities} model The entity being updated
+   * @param {string} model The entity being updated
    * @returns {string[]} an array of fields that updatable
    * @memberof DbHelper
    */
@@ -125,7 +125,7 @@ export default class DbHelper {
    * Gets the fields that are required for create
    *
    * @static
-   * @param {Entities} model Entity being inserted
+   * @param {string} model Entity being inserted
    * @returns {string[]} array of fields that are required
    * @memberof DbHelper
    */

@@ -14,11 +14,10 @@
     "strictNullChecks": true,
     "sourceMap": true,
     "noImplicitAny": true,
-    // "outDir": "./build",
     "allowJs": true,
     "noEmit": false,
     "esModuleInterop": true
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "coverage", "build", "task"]
+  "exclude": ["node_modules", "coverage", "build", "task", "**/*.spec.ts"]
 }
