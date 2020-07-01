@@ -19,11 +19,11 @@ const worker = new Worker(
 );
 
 worker.on('completed', job => {
-  console.log(`${job.id} has completed!`);
+  winston.info(`${job.id} has completed!`);
 });
 
 worker.on('failed', (job, err) => {
-  console.log(`${job.id} has failed with ${err.message}`);
+  winston.error(`${job.id} has failed with ${err.message}`);
 });
 
 export default async function addJobs(): Promise<void> {

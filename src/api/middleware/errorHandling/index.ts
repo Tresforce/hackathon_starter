@@ -46,7 +46,8 @@ export function sendError(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   next: NextFunction
 ): Response {
-  winston.error(err);
+  winston.error(`${err.message} ${JSON.stringify(err.contextObject, null, 2)}`);
+  winston.debug(err.stack);
   res.status(err.status);
   return res.json({
     error: {
