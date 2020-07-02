@@ -1,4 +1,4 @@
-import User from './User';
+import User from './Account';
 
 export default {
   User

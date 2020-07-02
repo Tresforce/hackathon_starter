@@ -1,4 +1,4 @@
-import User from '../database/entities/User';
+import User from '../database/entities/Account';
 
 export interface AuthenticatedUser {
   user: User;

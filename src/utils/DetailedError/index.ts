@@ -59,7 +59,7 @@ export default class DetailedError extends Error {
     name: string;
     message: string;
     statusCode: number;
-    contextObject: { [key: string]: string };
+    contextObject: { [key: string]: any };
   }) {
     super(message);
     if (typeof Error.captureStackTrace !== 'undefined') {

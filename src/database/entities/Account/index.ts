@@ -3,7 +3,7 @@ import BaseEntity from '../BaseEntity';
 import Address from '../Address';
 
 @Entity()
-export default class User extends BaseEntity {
+export default class Account extends BaseEntity {
   @Column()
   public firstName!: string;
 

@@ -5,7 +5,7 @@
 
 import DbHelper from '../helper';
 import makerUsers from '../../../../tests/factories/userFactory';
-import User from '../../../entities/User';
+import User from '../../../entities/Account';
 
 const INVALID_INPUT = {
   id: 'asldkjfaslkdlkjasf',

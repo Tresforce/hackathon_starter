@@ -2,7 +2,7 @@ import argon2 from 'argon2';
 import { getManager } from 'typeorm';
 import jwt from 'jsonwebtoken';
 import { BAD_REQUEST } from 'http-status-codes';
-import User from '../../database/entities/User';
+import User from '../../database/entities/Account';
 import DbController from '../../database/controllers';
 import UserController from '../../controllers/User';
 import DetailedError from '../../utils/DetailedError';

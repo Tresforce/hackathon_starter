@@ -6,7 +6,7 @@ import { Connection, QueryRunner } from 'typeorm';
 import DbHelper from '../../../database/controllers/utils/helper';
 import { pgConnection } from '../../setup';
 import makeUsers from '../../factories/userFactory';
-import User from '../../../database/entities/User';
+import User from '../../../database/entities/Account';
 
 describe('db helper class', () => {
   let VALID_INPUT: User;

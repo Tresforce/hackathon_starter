@@ -14,9 +14,10 @@ const { APP_PORT, API_VERSION, NODE_ENV } = config;
 
 async function startServer(): Promise<void> {
   const app = express();
+
   winston.info(`Node env is ${NODE_ENV}`);
   try {
-    await require('./loaders').default({ expressApp: app });
+    await require('./loaders').default({ app });
   } catch (error) {
     winston.error(`Error loading application: ${error}`);
     process.exit(1);

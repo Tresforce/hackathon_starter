@@ -1,5 +1,5 @@
 import faker from 'faker';
-import User from '../../database/entities/User';
+import User from '../../database/entities/Account';
 
 const makeUsers = (numUsers: number): User[] => {
   const users = new Array(numUsers).fill(null) as User[];

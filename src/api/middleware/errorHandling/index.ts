@@ -1,21 +1,22 @@
 import { NextFunction, Request, Response } from 'express';
-import { NOT_FOUND } from 'http-status-codes';
+import { NOT_FOUND, UNPROCESSABLE_ENTITY } from 'http-status-codes';
+import { ValidateError } from 'tsoa';
 import logger from '../../../utils/logger';
 import DetailedError from '../../../utils/DetailedError';
 
 const winston = logger(module);
 
 /**
- * Creates a 404 error when route is not found
+ *
  *
  * @export
  * @param {Request} req
- * @param {Response} res
+ * @param {Response} _
  * @param {NextFunction} next
  */
 export function notFoundError(
   req: Request,
-  res: Response,
+  _: Response,
   next: NextFunction
 ): void {
   const error = new DetailedError({
@@ -30,13 +31,13 @@ export function notFoundError(
 }
 
 /**
- * Logs Error and sends to client
+ *
  *
  * @export
- * @param {DetailedError} err the thrown error
+ * @param {DetailedError} err
  * @param {Request} req
  * @param {Response} res
- * @param {NextFunction} next
+ * @param {NextFunction} [next]
  * @returns {Response}
  */
 export function sendError(
@@ -44,15 +45,33 @@ export function sendError(
   req: Request,
   res: Response,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  next: NextFunction
+  next?: NextFunction
 ): Response {
-  winston.error(`${err.message} ${JSON.stringify(err.contextObject, null, 2)}`);
-  winston.debug(err.stack);
-  res.status(err.status);
+  let validateError: DetailedError | undefined;
+  if (err instanceof ValidateError) {
+    winston.warn(
+      `Caught Validation Error for ${req.path}:${JSON.stringify(
+        err.fields,
+        null,
+        2
+      )}`
+    );
+    validateError = new DetailedError({
+      name: 'Validation Error',
+      message: 'Validation failed',
+      statusCode: UNPROCESSABLE_ENTITY,
+      contextObject: {
+        fields: err.fields
+      }
+    });
+  }
+  const responseError = validateError ?? err;
+  winston.debug(responseError.stack);
+  res.status(responseError.status);
   return res.json({
     error: {
-      message: err.message,
-      object: err.contextObject
+      message: responseError.message,
+      ...responseError.contextObject
     }
   });
 }

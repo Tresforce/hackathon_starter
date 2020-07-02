@@ -1,14 +1,16 @@
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import { Application } from 'express';
-import routes from '../../api';
+import { Express, Request, Response } from 'express';
+import swaggerUi from 'swagger-ui-express';
 import middleware from '../../api/middleware';
 import config from '../../config';
+
+import { RegisterRoutes } from '../../../build/routes';
 
 const { API_VERSION } = config;
 const apiPrefix = `/${API_VERSION}/`;
 
-export default ({ app }: { app: Application }): void => {
+export default ({ app }: { app: Express }): void => {
   // It shows the real origin IP in the heroku or Cloudwatch logs
   app.enable('trust proxy');
 
@@ -17,20 +19,27 @@ export default ({ app }: { app: Application }): void => {
 
   // Middleware that transforms the raw string of req.body into json
   app.use(bodyParser.json());
+
+  app.use('/docs', swaggerUi.serve, async (_req: Request, res: Response) => {
+    return res.send(
+      swaggerUi.generateHTML(await import('../../../build/swagger.json'))
+    );
+  });
+
   /**
    * Health Check endpoints
    */
-  app.get(`${apiPrefix}status`, (req, res) => {
+  app.get(`${apiPrefix}status`, (_, res) => {
     res.status(200).end();
   });
-  app.head(`${apiPrefix}status`, (req, res) => {
+  app.head(`${apiPrefix}status`, (_, res) => {
     res.status(200).end();
   });
-  app.use(apiPrefix, middleware.authorization);
+
+  // register routes
+  RegisterRoutes(app);
   // Log All requests
-  app.use(apiPrefix, middleware.logRequest);
-  // Load API routes
-  app.use(apiPrefix, routes());
+
   // catch 404 and forward to error handler
   app.use(middleware.notFoundError);
   app.use(middleware.sendError);

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { BAD_REQUEST } from 'http-status-codes';
 import DbHelper from '../../../database/controllers/utils/helper';
-import User from '../../../database/entities/User';
+import User from '../../../database/entities/Account';
 import DetailedError from '../../../utils/DetailedError';
 
 function validateCreate(req: Request, res: Response, next: NextFunction): void {

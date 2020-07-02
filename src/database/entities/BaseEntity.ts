@@ -3,10 +3,11 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm';
+import { UUID } from '../../typings';
 
 export default abstract class BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  public id!: string;
+  public id!: UUID;
 
   @CreateDateColumn({ name: 'dateCreated', nullable: false })
   public dateCreated!: Date;

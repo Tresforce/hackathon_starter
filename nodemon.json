@@ -1,0 +1,6 @@
+{
+  "exec": "ts-node -T --pretty src/index.ts",
+  "watch": ["src", ".env"],
+  "ignore": ["src/**/*.spec.ts"],
+  "ext": "ts"
+}

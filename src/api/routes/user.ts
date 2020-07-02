@@ -11,7 +11,7 @@ export default (app: Router): Router => {
   app.use('/users', route);
 
   route.post(
-    '/sign-up',
+    '/create-account',
     userMiddleware.validateCreate,
     async (req, res, next) => {
       const userDTO = req.body;
@@ -36,13 +36,13 @@ export default (app: Router): Router => {
     }
   });
 
-  route.get('/schema', (req, res) => {
+  route.get('/get-schema', (req, res) => {
     const schema = UserController.getSchema();
     winston.debug(schema);
     res.send(schema);
   });
 
-  route.patch('/update', (req, res, next) => {
+  route.patch('/update-account-info', (req, res, next) => {
     try {
       console.log('IMPLEMENT ME');
       res.status(NO_CONTENT).send('needs implementation');

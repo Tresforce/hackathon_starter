@@ -10,7 +10,7 @@ import {
 import { Column } from 'typeorm';
 import statesEnum from '../../../utils/enums/states';
 
-export default class Address {
+export default class EntityAddress {
   @IsDefined()
   @IsString()
   @Column({ nullable: true })

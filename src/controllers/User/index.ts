@@ -1,5 +1,5 @@
 import { getManager } from 'typeorm';
-import User from '../../database/entities/User';
+import User from '../../database/entities/Account';
 import DbController from '../../database/controllers';
 import logger from '../../utils/logger';
 import { EntityObject } from '../../typings/databaseController';
