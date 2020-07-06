@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { NOT_FOUND, UNPROCESSABLE_ENTITY } from 'http-status-codes';
 import { ValidateError } from 'tsoa';
-import logger from '../../../utils/logger';
+import logger from '../../../services/logger';
 import DetailedError from '../../../utils/DetailedError';
 
 const winston = logger(module);

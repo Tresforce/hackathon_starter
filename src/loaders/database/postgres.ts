@@ -3,7 +3,7 @@ import { Connection, ConnectionOptions, createConnection } from 'typeorm';
 import config from '../../config';
 import User from '../../database/entities/Account';
 import { PostgresConnectionOptions } from '../../typings/postgres';
-import logger from '../../utils/logger';
+import logger from '../../services/logger';
 
 const winston = logger(module);
 

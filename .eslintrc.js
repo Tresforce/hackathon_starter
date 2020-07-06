@@ -101,6 +101,7 @@ const baseRules = {
   semi: 'off',
   quotes: 'off',
   indent: 'off',
+  'class-methods-use-this': 'off',
   'no-void': 'off',
   'import/extensions': 'off',
   'prettier/prettier': ['error', { singleQuote: true }],

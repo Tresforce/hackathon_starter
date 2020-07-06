@@ -1,4 +1,4 @@
-import logger from '../utils/logger';
+import logger from '../services/logger';
 import application from './application';
 import database from './database';
 import { Config } from '../typings/config';

@@ -1,4 +1,4 @@
-import Account from '../database/entities/Account';
+import Account from '../models/account/dtos/createAccount';
 
 export type UserAccount = {
   [key in keyof Account]: Account[key];

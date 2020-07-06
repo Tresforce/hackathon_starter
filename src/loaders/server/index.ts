@@ -2,18 +2,20 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import { Express, Request, Response } from 'express';
 import swaggerUi from 'swagger-ui-express';
+import promBundle from 'express-prom-bundle';
 import middleware from '../../api/middleware';
 import config from '../../config';
 
 import { RegisterRoutes } from '../../../build/routes';
 
+const metricsMiddleware = promBundle({ includeMethod: true });
 const { API_VERSION } = config;
 const apiPrefix = `/${API_VERSION}/`;
 
 export default ({ app }: { app: Express }): void => {
   // It shows the real origin IP in the heroku or Cloudwatch logs
   app.enable('trust proxy');
-
+  app.use(metricsMiddleware);
   // Enable Cross Origin Resource Sharing to all origins by default
   app.use(cors());
 

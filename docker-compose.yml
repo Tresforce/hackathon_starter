@@ -1,18 +1,29 @@
 version: '3.8'
 services:
-  postgres:
-    container_name: 'postgres'
-    image: 'postgres:11.5-alpine'
+  ### Databases ###
+  ravendb:
+    container_name: 'ravendb'
+    image: 'ravendb/ravendb'
+    hostname: 'ravendb'
+    ports:
+      - '8080:8080'
+      - '38888:38888'
+    # environment:
+    #   RAVEN_ARGS: --ServerUrl=http://0.0.0.0:8080 --Setup.Mode=None --Security.UnsecuredAccessAllowed=PublicNetwork --License.Eula.Accepted=true
     volumes:
-      - ./pg-init-scripts:/docker-entrypoint-initdb.d
+      - .tmp/:/opt/RavenDB/Server/RavenData
     environment:
-      - POSTGRES_USER=${TYPEORM_USERNAME}
-      - POSTGRES_PASSWORD=${TYPEORM_PASSWORD}
-      - POSTGRES_MULTIPLE_DATABASES=${TYPEORM_DATABASE},${TYPEORM_DATABASE2}
+      - RAVEN_Security_UnsecuredAccessAllowed=PublicNetwork
+      - RAVEN_Setup_Mode=None
+      - RAVEN_License_Eula_Accepted=true
+      - RAVEN_ServerUrl=http://0.0.0.0:8080
+      - RAVEN_License.Eula.Accepted=true
+
   redis:
     container_name: 'queue'
     image: 'redis'
 
+  ### Server ###
   app:
     container_name: 'app'
     build:
@@ -22,9 +33,9 @@ services:
       - '3005:3005'
     env_file: .env
     depends_on:
-      - postgres
+      - ravendb
       - redis
-    command: npm run local
+    command: npm run testing
     working_dir: /app
     volumes:
       - ./:/app:cached

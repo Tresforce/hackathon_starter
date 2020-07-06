@@ -6,7 +6,7 @@ require('dotenv').config();
 /* We need to load environment variables first */
 import express from 'express';
 import config from './config';
-import logger from './utils/logger';
+import logger from './services/logger';
 
 const winston = logger(module);
 
