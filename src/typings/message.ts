@@ -10,8 +10,6 @@ export class Command extends Message {
   data!: Record<any, any>;
 }
 
-export interface Event extends Message {
-  [key: string]: any;
-}
+export class Event extends Message {}
 
-export type CommandFunction = (name: string) => void | DetailedError;
+export type CommandFunction = (name: string) => Promise<void | DetailedError>;

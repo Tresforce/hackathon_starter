@@ -11,4 +11,4 @@ coverage
 yarn.lock
 .env
 .history
-tmp/*
+.tmp

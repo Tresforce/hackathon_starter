@@ -103,6 +103,7 @@ const baseRules = {
   indent: 'off',
   'class-methods-use-this': 'off',
   'no-void': 'off',
+  'import/prefer-default-export': 'off',
   'import/extensions': 'off',
   'prettier/prettier': ['error', { singleQuote: true }],
   'brace-style': 'off',

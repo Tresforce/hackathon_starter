@@ -5,6 +5,7 @@ require('dotenv').config();
 
 /* We need to load environment variables first */
 import express from 'express';
+import 'reflect-metadata';
 import config from './config';
 import logger from './services/logger';
 

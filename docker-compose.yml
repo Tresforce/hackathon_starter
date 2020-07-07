@@ -4,14 +4,14 @@ services:
   ravendb:
     container_name: 'ravendb'
     image: 'ravendb/ravendb'
-    hostname: 'ravendb'
+    # hostname: 'ravendb'
     ports:
       - '8080:8080'
       - '38888:38888'
     # environment:
     #   RAVEN_ARGS: --ServerUrl=http://0.0.0.0:8080 --Setup.Mode=None --Security.UnsecuredAccessAllowed=PublicNetwork --License.Eula.Accepted=true
     volumes:
-      - tmp/:/opt/RavenDB/Server/RavenData
+      - .tmp/:/opt/RavenDB/Server/RavenData
     environment:
       - RAVEN_Security_UnsecuredAccessAllowed=PublicNetwork
       - RAVEN_Setup_Mode=None

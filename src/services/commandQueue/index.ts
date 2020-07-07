@@ -1,33 +1,38 @@
 import Queue from 'bull';
 import Redis from 'ioredis';
 import logger from '../logger';
-import AccountService from '../../models/account/commands/createAccount';
 
-export const commandStackQueue = 'write-que';
+import { CommandFunction } from '../../typings/message';
+
+const commandStackQueue = 'write-queue';
 const winston = logger(module);
 
 function createClient(): Redis.Redis {
   return new Redis('redis://redis:6379');
 }
 
-const commandQueue = new Queue(commandStackQueue, { createClient });
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export default class CommandQueue {
+  private queue = new Queue(commandStackQueue, { createClient });
 
-void commandQueue.process(async job => {
-  winston.debug(job.data);
-  return AccountService.handle(job.data);
-});
+  public async processEvent(
+    event: Record<any, any>,
+    handler: CommandFunction
+  ): Promise<any> {
+    winston.info('adding job to queue');
+    await this.queue.add(event);
 
-// Define a local completed event
-commandQueue.on('completed', (job, result) => {
-  console.log(`Job completed with result ${result}`);
-});
+    // eslint-disable-next-line @typescript-eslint/require-await
+    void this.queue.process(async job => {
+      winston.debug(job.data);
+      return handler(job.data);
+    });
 
-commandQueue.on('failed', (job, result) => {
-  console.log(`Job failed with result ${result}`);
-});
+    this.queue.on('completed', (job, result) => {
+      winston.info(`Job completed with result: ${result}`);
+    });
 
-export default async function addJob(event: Record<any, any>): Promise<any> {
-  winston.info('adding job to queue');
-  return commandQueue.add(event);
+    this.queue.on('failed', (job, result) => {
+      winston.error(`Job failed: ${result}`);
+    });
+  }
 }
