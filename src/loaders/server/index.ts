@@ -3,6 +3,7 @@ import cors from 'cors';
 import { Express, Request, Response } from 'express';
 import swaggerUi from 'swagger-ui-express';
 import promBundle from 'express-prom-bundle';
+import { UI } from 'bull-board';
 import middleware from '../../api/middleware';
 import config from '../../config';
 
@@ -22,6 +23,7 @@ export default ({ app }: { app: Express }): void => {
   // Middleware that transforms the raw string of req.body into json
   app.use(bodyParser.json());
 
+  app.use('/admin/queues', UI);
   app.use('/docs', swaggerUi.serve, async (_req: Request, res: Response) => {
     return res.send(
       swaggerUi.generateHTML(await import('../../../build/swagger.json'))

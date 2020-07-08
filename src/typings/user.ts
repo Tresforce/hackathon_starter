@@ -1,7 +1,8 @@
 import { Event } from './message';
 import { UUID } from '.';
 
-export default class CreateUser {
+export class CreateUser {
+  public userId!: UUID;
   public firstName!: string;
   public lastName!: string;
   public email!: string;
@@ -9,8 +10,8 @@ export default class CreateUser {
   public zipCode?: string;
 }
 
-export class UserCreatedEvent extends Event {
-  public userId!: UUID;
+export class UserEvent extends Event {
+  public userId = null;
   public firstName!: string;
   public lastName!: string;
   public email!: string;
@@ -24,15 +25,6 @@ export class UserInformationUpdated extends Event {
 export class UserDeleted extends Event {
   public name!: 'UserDeleted';
   public userId!: UUID;
-}
-
-export class UserEvent implements User {
-  public userId!: UUID;
-  public firstName!: string;
-  public lastName!: string;
-  public email!: string;
-  public phoneNumber?: string;
-  public zipCode?: string;
 }
 
 interface User {

@@ -4,12 +4,17 @@ import { CreateAccountParams } from '../../../typings/account';
 
 import CreateUser from '../DTOs';
 import CommandQueue from '../../../services/commandQueue';
+import UserRepository from '../repositories';
 
+async function createUserHandler(user: CreateUser): Promise<void> {
+  const repository = new UserRepository();
+  await repository.createUser(user);
+  await repository.save();
+}
 @autoInjectable()
 export default class UserCommand {
-  constructor(private queue?: CommandQueue) {}
-
-  public async createUser(dto: CreateAccountParams): Promise<any> {
+  public async createUser(dto: CreateAccountParams): Promise<void> {
+    const queue = CommandQueue;
     const user = new CreateUser();
     user.userId = uuid();
     user.email = dto.email;
@@ -18,10 +23,16 @@ export default class UserCommand {
     if (dto.phoneNumber) {
       user.phoneNumber = dto.phoneNumber;
     }
-
-    return this.queue!.processEvent(user, this.createUserHandler);
-  }
-  private async createUserHandler(): Promise<void> {
-    return Promise.resolve(console.log('ok'));
+    console.log('adding que');
+    await queue.add(user);
+    await queue.process(async job => {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          console.log(job.data);
+          console.log('hello');
+          resolve();
+        }, 2000);
+      });
+    });
   }
 }

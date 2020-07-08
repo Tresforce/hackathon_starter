@@ -8,6 +8,7 @@ import express from 'express';
 import 'reflect-metadata';
 import config from './config';
 import logger from './services/logger';
+import './models/user/processor';
 
 const winston = logger(module);
 

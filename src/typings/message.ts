@@ -12,4 +12,4 @@ export class Command extends Message {
 
 export class Event extends Message {}
 
-export type CommandFunction = (name: string) => Promise<void | DetailedError>;
+export type CommandFunction = (obj: any) => Promise<void | DetailedError>;

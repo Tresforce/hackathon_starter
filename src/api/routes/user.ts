@@ -25,7 +25,6 @@ export class UserRouter extends Controller {
   ): Promise<void> {
     try {
       this.setStatus(CREATED);
-
       await new UserCommand().createUser(requestBody);
     } catch (error) {
       throw new DetailedError({
