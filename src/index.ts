@@ -7,8 +7,7 @@ require('dotenv').config();
 import express from 'express';
 import 'reflect-metadata';
 import config from './config';
-import logger from './services/logger';
-import './models/user/processor';
+import logger from './utils/logger';
 
 const winston = logger(module);
 

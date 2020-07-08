@@ -1,6 +1,6 @@
 import { Express } from 'express';
 
-import logger from '../services/logger';
+import logger from '../utils/logger';
 import store, { EventLog } from './database/ravendb';
 import expressLoader from './server';
 import '../services/commandQueue';

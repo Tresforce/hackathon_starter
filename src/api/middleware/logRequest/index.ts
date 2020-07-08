@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import logger from '../../../services/logger';
+import logger from '../../../utils/logger';
 
 const winston = logger(module);
 // FIXME update log requests

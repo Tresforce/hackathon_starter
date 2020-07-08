@@ -4,7 +4,7 @@ import {
   CreateDatabaseOperation
 } from 'ravendb';
 
-import logger from '../../services/logger';
+import logger from '../../utils/logger';
 
 const winston = logger(module);
 
