@@ -103,3 +103,22 @@ metadata
 data
 
     A JSON object itself, and the “payload” of the event. The contents of a message’s data field are analogous to the parameters in a function call.
+
+When a command is processed, the output is one or more events
+
+When we start writing messages, we’ll organize them into what we call streams. Streams group messages together logically, usually representing an entity or process in your system. Within a stream, messages are stored in the order they were written.
+we call this type of stream an entity stream
+
+We use UUIDs as identifiers in our system, specifically version 4 UUIDs, and so a natural name for one of these user identity streams would be `identity-81cb4647-1296-4f3b-8039-0eedae41c97e`
+
+an entity stream only has a single writer. 
+
+There are other kinds of streams, though. If all goes as planned, Video Tutorials will have more than one user, each with a stream of the form identity-UUID. Every event in such an entity stream is also part of the identity category stream.
+
+To get the category stream that an entity stream belongs to, just take everything to the left of the first dash. So for identity-81cb4647-1296-4f3b-8039-0eedae41c97e, identity is the category. The identity category stream contains every event written to every identity in our system.
+
+We talked about commands, and commands are also written to streams. They aren’t written to entity streams, though—they are written to command streams. In the case of this identity Component, we’ll write to streams of the form `identity:command-81cb4647-1296-4f3b-8039-0eedae41c97e`
+
+Streams, like messages, don’t get deleted. Messages are added to them in an append-only manner.
+
+Now, if there’s anything we can take from the 1984 Ghostbusters film, crossing the streams is Bad™

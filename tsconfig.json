@@ -29,5 +29,5 @@
     "resolveJsonModule": true
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "coverage", "build", "task"]
+  "exclude": ["node_modules", "coverage", "build", "task", "example"]
 }
